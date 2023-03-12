@@ -34,7 +34,7 @@ const startGame = (gameid) => {
 	let state = gameStates[gameid];
 	state.active = true;
 	state.timeStarted = Date.now();
-	state.word = solutions[Math.trunc(Math.random() * solutions.length)].toUpperCase();
+	state.word = "WORSE" // solutions[Math.trunc(Math.random() * solutions.length)].toUpperCase();
 	state.guesses = {};
 	for (const player of state.players) {
 		state.guesses[player] = [];
@@ -64,34 +64,35 @@ const guess = (gameid, userid, guess) => {
 	if (!words.has(guess.toLowerCase())) return 'INVALID';
 	let state = gameStates[gameid];
 	state.guesses[userid].push(guess);
-	let colors = "";
+	let colors = [];
 	let word = state.word;
-	for (let i = 0; i < 5; i++) {
 	let new_word = "";
+	for (let i = 0; i < 5; i++) {
 		if (word[i] == guess[i]) {
-			colors += "Y";
+			colors.push("Y");
+			new_word += "_";
+		}
+		else {
+			colors.push("N");
+			new_word += word[i];
+		}
+	}
+	word = new_word;
+	for (let i = 0; i < 5; i++) {
+		console.log(word);
+		new_word = "";
+		let ix = word.indexOf(guess[i]);
+		if (ix != -1) {
+			colors[i] = "?"
 			for (let j = 0; j < 5; j++) {
-				if (j == i) new_word += "_";
+				if (j == ix) new_word += "_";
 				else new_word += word[j];
 			}
-
-		} else {
-			let ix = word.indexOf(guess[i]);
-			if (ix == -1) {
-				colors += "N"
-				new_word = word
-			}
-			else {
-				colors += "?"
-				for (let j = 0; j < 5; j++) {
-					if (j == i) new_word += "_";
-					else new_word += word[i];
-				}
-			}
+			word = new_word;
 		}
-		word = new_word;
-
 	}
+	colors = colors.join("");
+	console.log(colors);
 
 	if (colors == "YYYYY") {
 		let points = 60 - 10 * (state.guesses[userid].length - 1);
