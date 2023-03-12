@@ -40,7 +40,7 @@ const Game = (props) => {
 	}
 
 	const inputChar = async (e) => {
-		if (guesses >= 5 || !active || colors[-1] == "YYYYY") return;
+		if (guesses >= 5 || !active || colors[colors.length-1] == "YYYYY") return;
 		if ((String.fromCharCode(e.keyCode).match(/[a-zA-Z]/g) && curGuess.length < 5) || e.key == 'Backspace') updateGuess(guesses.length, e.key);
 		else if (e.key == 'Enter') {
 			console.log("GUESSING");
@@ -72,11 +72,11 @@ const Game = (props) => {
   }, [curGuess, active, colors]);
 
   useEffect(() => {
+	  console.log("mounting");
 	  socket.on("update", (state) => {
 		  setGameState(state);
 		  setActive(state.active);
 		  setTime(state.timeRemaining);
-		  console.log(state);
 	  });
 	  socket.on("end", (res) => {
 		  setActive(false);
@@ -121,7 +121,7 @@ const Game = (props) => {
   }
 
   const gameIDChange = (e) => {
-	  setGameID(e.target.value);
+	  setGameID(e.target.value.toUpperCase());
   }
 
   const nameChange = (e) => {
@@ -197,7 +197,9 @@ const Game = (props) => {
 				</div>
 				{results.word == "" ? '' : 
 					<div>
-					<h2 style={{alignText:'center'}}> Results: </h2>
+					<h2> Answer: </h2>
+					<h2 style={{color:'blue'}}> {results.word} </h2>
+					<h3 style={{alignText:'center'}}> Results: </h3>
 					{showResults()}
 					</div>
 				}

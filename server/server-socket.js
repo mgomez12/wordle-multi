@@ -35,7 +35,10 @@ const startRunningGame = (gameId) => {
 
     // Reset game 5 seconds after someone wins.
 	let publicState = gameLogic.getPublicGameState(gameId);
-	if (publicState.timeRemaining == 0) {
+	let finished = true;
+	  let pointsArr = gameLogic.gameStates[gameId].points
+	for (const player in pointsArr) finished = finished && pointsArr[player] != 0;
+	if (publicState.timeRemaining == 0 || finished) {
 		let results = gameLogic.endGame(gameId);
 		io.to(gameId).emit("end", results);
 		clearInterval(gameLogic.gameStates[gameId].iid);
