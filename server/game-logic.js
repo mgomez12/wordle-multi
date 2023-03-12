@@ -34,7 +34,7 @@ const startGame = (gameid) => {
 	let state = gameStates[gameid];
 	state.active = true;
 	state.timeStarted = Date.now();
-	state.word = "WORSE" // solutions[Math.trunc(Math.random() * solutions.length)].toUpperCase();
+	state.word = solutions[Math.trunc(Math.random() * solutions.length)].toUpperCase();
 	state.guesses = {};
 	for (const player of state.players) {
 		state.guesses[player] = [];
