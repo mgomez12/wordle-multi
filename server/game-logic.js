@@ -34,7 +34,7 @@ const startGame = (gameid) => {
 	let state = gameStates[gameid];
 	state.active = true;
 	state.timeStarted = Date.now();
-	state.word = 'SPOOF'; //solutions[Math.trunc(Math.random() * solutions.length)].toUpperCase();
+	state.word = solutions[Math.trunc(Math.random() * solutions.length)].toUpperCase();
 	state.guesses = {};
 	for (const player of state.players) {
 		state.guesses[player] = [];
@@ -77,7 +77,10 @@ const guess = (gameid, userid, guess) => {
 
 		} else {
 			let ix = word.indexOf(guess[i]);
-			if (ix == -1) colors += "N"
+			if (ix == -1) {
+				colors += "N"
+				new_word = word
+			}
 			else {
 				colors += "?"
 				for (let j = 0; j < 5; j++) {
