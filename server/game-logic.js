@@ -66,8 +66,8 @@ const guess = (gameid, userid, guess) => {
 	state.guesses[userid].push(guess);
 	let colors = "";
 	let word = state.word;
-	let new_word = "";
 	for (let i = 0; i < 5; i++) {
+	let new_word = "";
 		if (word[i] == guess[i]) {
 			colors += "Y";
 			for (let j = 0; j < 5; j++) {
