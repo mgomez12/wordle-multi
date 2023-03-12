@@ -1,0 +1,21 @@
+.text-square {
+	height:50px;
+	width:50px;
+	font-size:20pt;
+	background-color:#DDDDDD;
+	margin:10px;
+	text-align:center;
+	line-height: 50px;
+}
+
+.correct {
+	background-color:#33DD00;
+}
+
+.incorrect {
+	background-color:#AAAAAA;
+}
+
+.present {
+	background-color:#CCCC00;
+}
