@@ -37,9 +37,9 @@ const App = () => {
     // <> is like a <div>, but won't show
     // up in the DOM tree
     <>
-	  <div>
+	  <h1 style={{textAlign:'center', margin:'30px', color:'green'}}>
 	  WORDLEEE
-	  </div>
+	  </h1>
       <div className="App-container">
         <Router>
 	  	  <Redirect noThrow={true} from="/" to="/game"/>

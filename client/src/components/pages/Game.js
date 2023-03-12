@@ -93,7 +93,9 @@ const Game = (props) => {
 	  console.log("checking if can join");
 	  console.log(props.gameId, ", ", props.userId);
 	if (props.gameId && props.userId) {
-		get("/api/validGame?id="+props.gameId+"&user="+props.userId).then((resp) => {
+		console.log(props.userId);
+		let url = "/api/validGame?id="+props.gameId+"&user="+props.userId;
+		get("/api/validGame", {id: props.gameId, user:props.userId}).then((resp) => {
 			if (resp.validGame && resp.validSession) {
 				setValidSession(true);
 				console.log("valid session");
