@@ -1,5 +1,5 @@
 /** constants */
-TIME_LIMIT = 1000 * 10;// 60 * 2;
+TIME_LIMIT = 1000 * 60 * 2;
 
 var fs = require("fs");
 var solutions = fs.readFileSync(require('path').resolve(__dirname, 'solutions.txt'));
