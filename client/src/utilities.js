@@ -41,8 +41,7 @@ export function get(endpoint, params = {}) {
   const fullPath = endpoint + "?" + formatParams(params);
   return fetch(fullPath)
     .then(convertToJSON)
-	.catch(e => e);
-    ;
+    .catch((e) => e);
 }
 
 // Helper code to make a post request. Default parameter of empty JSON Object for params.

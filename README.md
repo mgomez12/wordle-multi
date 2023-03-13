@@ -1,2 +1,1 @@
-
 Multiplayer Wordle
